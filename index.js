@@ -23,9 +23,9 @@ io.sockets.on('connection', function(socket) {
 		if (!playerIds[roomId]) {
 			playerIds[roomId] = []
 		}
-		const playerId = playerIds[roomId].length + 1
+		const playerId = socket.id
 		socket.emit('playerId', { playerId })
-		playerIds[roomId][socket.id] = true
+		playerIds[roomId][playerId] = true
 		console.log({ playerIds })
 		// 1, 2
 		if (Object.keys(playerIds[roomId]).length === 2) {
