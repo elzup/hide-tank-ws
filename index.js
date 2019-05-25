@@ -12,23 +12,31 @@ server.listen(port, () => {
 const io = socketio.listen(server)
 
 // S04. connectionイベントを受信する
+const playerIds = {}
 io.sockets.on('connection', function(socket) {
 	let roomId = ''
-	const playerIds = []
+	console.log(socket.id)
 
 	socket.on('join', function(data) {
 		roomId = data.roomId
 		socket.join(roomId)
-		const playerId = playerIds.length + 1
+		if (!playerIds[roomId]) {
+			playerIds[roomId] = []
+		}
+		const playerId = playerIds[roomId].length + 1
 		socket.emit('playerId', { playerId })
-		playerIds.push(playerId)
+		playerIds[roomId][socket.id] = true
+		console.log({ playerIds })
 		// 1, 2
-		if (playerIds.length === 2) {
+		if (Object.keys(playerIds[roomId]).length === 2) {
 			io.to(roomId).emit('start', {
 				startTime: +new Date() + 10 * 1000,
-				playerIds,
+				playerIds: Object.keys(playerIds[roomId]),
 			})
 		}
+	})
+	socket.on('disconnect', function(data) {
+		delete playerIds[roomId][socket.id]
 	})
 
 	socket.on('playerMove', function(data) {

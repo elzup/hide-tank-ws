@@ -1,14 +1,14 @@
 {
-  "name": "hide-tank-ws",
-  "version": "1.0.0",
-  "description": "hide-tank websocket server",
-  "main": "index.js",
-  "license": "MIT",
-  "dependencies": {
-    "express": "^4.16.4",
-    "socket.io": "^2.2.0"
-  },
-  "scripts": {
-    "start": "node index.js"
-  }
+	"name": "hide-tank-ws",
+	"version": "1.0.0",
+	"description": "hide-tank websocket server",
+	"main": "index.js",
+	"license": "MIT",
+	"dependencies": {
+		"express": "^4.16.4",
+		"socket.io": "^2.2.0"
+	},
+	"scripts": {
+		"start": "node index.js"
+	}
 }
