@@ -39,14 +39,7 @@ io.sockets.on('connection', function(socket) {
 		delete playerIds[roomId][socket.id]
 	})
 
-	socket.on('playerMove', function(data) {
+	socket.on('update', function(data) {
 		io.to(roomId).emit('playerMove', data)
 	})
-	socket.on('bulletMove', function(data) {
-		io.to(roomId).emit('playerMove', data)
-	})
-	socket.on('damaged', function(data) {
-		io.to(roomId).emit('playerMove', data)
-	})
-	socket.on('disconnect', function() {})
 })
