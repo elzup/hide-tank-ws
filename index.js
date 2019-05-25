@@ -40,6 +40,6 @@ io.sockets.on('connection', function(socket) {
 	})
 
 	socket.on('update', function(data) {
-		io.to(roomId).emit('playerMove', data)
+		io.to(roomId).emit('update', data)
 	})
 })
